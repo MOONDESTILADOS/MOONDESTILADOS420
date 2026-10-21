@@ -74,7 +74,7 @@ body{background:radial-gradient(900px 500px at 85% -5%,rgba(139,77,255,.28),tran
 details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px}
 summary{font-weight:600;cursor:pointer}
 details p{color:var(--mute);margin:10px 0 0}
-.contact{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.contact{display:grid;grid-template-columns:1fr;gap:18px}
 @media(max-width:700px){.contact{grid-template-columns:1fr}}
 .box{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px}
 .box h3{margin-bottom:10px}
@@ -151,31 +151,20 @@ footer button{background:none;border:0;color:inherit;text-decoration:underline;p
   <section id="faq">
     <div class="sec-h"><h2>Preguntas frecuentes</h2></div>
     <details><summary>¿Esta tienda cobra dinero?</summary><p>No. Armas tu pedido aquí y lo envías por WhatsApp; allí coordinamos el pago.</p></details>
-    <details><summary>¿Los productos son reales?</summary><p>Los publica la tienda. Los marcados como "ejemplo" son solo de prueba.</p></details>
     <details><summary>¿Cómo se hacen los envíos?</summary><p>Se coordinan por WhatsApp según tu ciudad, una vez confirmado el pedido.</p></details>
-    <details><summary>¿Cómo puedo devolver un producto?</summary><p>La política de devoluciones está pendiente de redacción y revisión legal.</p></details>
-  </section>
+    </section>
 
   <section id="contacto">
     <div class="sec-h"><h2>Contacto</h2></div>
     <div class="contact">
       <div class="box"><h3>Escríbenos</h3>
         <p>WhatsApp: +57 300 000 0000 <small>(ejemplo)</small><br>Correo: hola@ejemplo.com <small>(ejemplo)</small><br>Instagram: @marcademo <small>(ejemplo)</small><br>Horario: lunes a viernes, 9:00 a 17:00 <small>(ejemplo)</small></p></div>
-      <div class="box"><h3>Envíanos un mensaje</h3>
-        <label for="cn">Nombre</label><input id="cn" autocomplete="name">
-        <label for="cm">Mensaje</label><textarea id="cm" rows="3"></textarea>
-        <button class="btn sm" id="send">Enviar</button><p class="msg" id="cmsg"></p></div>
-    </div>
+      </div>
   </section>
 </div>
 </main>
 
-<footer><div class="wrap">
-  <div class="links">
-    <button data-pol="priv">Política de privacidad</button><button data-pol="datos">Tratamiento de datos</button><button data-pol="terms">Términos y condiciones</button><button data-pol="dev">Devoluciones</button><button id="adminBtn">Administrador</button>
-  </div>
-  MOONDESTILADOS 420 · Sitio en construcción. No se vende ni se envía nada todavía. Los textos legales están pendientes de redacción y revisión por un profesional.
-</div></footer>
+<footer><div class="wrap"><div class="links"><button id="adminBtn">Administrador</button></div></div></footer>
 
 <a class="wa" href="#contacto">WhatsApp</a>
 
@@ -358,7 +347,7 @@ $('adm').addEventListener('keydown',function(e){if(e.key==='Enter'&&!ADM&&e.targ
 (async function(){try{cart=JSON.parse(localStorage.getItem('m420cart')||'[]')}catch(e){}
  open('<h2 style="font-size:26px">Solo para mayores de 18</h2><p>Este sitio tiene estética cannabis. Confirma que eres mayor de edad para continuar.</p><button class="btn" id="age">Soy mayor de 18</button> <a class="btn alt" href="https://www.google.com">Salir</a>');
  if(tok){try{var a=await api('/rest/v1/admins?select=user_id');ADM=!!(a&&a.length)}catch(e){ADM=false}}
- await load()})();
+ await load();if(location.hash==='#admin')adm()})();window.addEventListener('hashchange',function(){if(location.hash==='#admin')adm()});
 
 </script>
 </body>
